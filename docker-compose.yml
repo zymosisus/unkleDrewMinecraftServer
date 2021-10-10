@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+    app:
+        build: .
+        command: /bin/sh -c "/src/scripts/startServer.sh"
+        ports:
+            - "${MINECRAFT_HOST_PORT}:25565"
+        working_dir: /var/games/minecraft/server/devServer
+        volumes:
+            - minecraft-data:/var/games/minecraft/server/production
+            - e:\minecraftdata\server-dev:/var/games/minecraft/server/devServer
+volumes:
+    minecraft-data:
