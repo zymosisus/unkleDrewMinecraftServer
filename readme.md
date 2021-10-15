@@ -43,15 +43,19 @@ Beyond an internet connection, these are the items you need to run.
 - Build and run in one.
 
     ```
-    docker compose --env-file ./configs/.env up 
+    docker compose --env-file ./configs/.env.dev up 
     ```
 
 # ToDo
 1. Environment info.
-2. Docker Compose file. 
+    - Need to design this.  Shouldn't have to build twice. 
+2. ~~Docker Compose file.~~ WORKING. 
 3. Proper Volumes
+    - Status: Copied E: over to wsl volume. 
+    - Need to remove named binding over to "Volume" 
+    - Need to create Dev Server initialization script.
 4. Setup Remote Version Control
-4. git Version Control for
+4. git Version Control for (repo initalized, and local.  Need to move to "Remote")
     1. DockerFile and Docker-Compose
     2. Run Scripts
     3. Config Files

@@ -4,10 +4,10 @@ services:
         build: .
         command: /bin/sh -c "/src/scripts/startServer.sh"
         ports:
-            - "${MINECRAFT_HOST_PORT}:25565"
+            - "25566:25565"
         working_dir: /var/games/minecraft/server/devServer
         volumes:
-            - minecraft-data:/var/games/minecraft/server/production
+            - minecraft-data:/var/games/minecraft/server/unkledrew
             - e:\minecraftdata\server-dev:/var/games/minecraft/server/devServer
 volumes:
     minecraft-data:
