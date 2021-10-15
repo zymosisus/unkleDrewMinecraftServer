@@ -61,7 +61,7 @@ FROM openjdk:16-jdk-buster
 
 RUN apt-get install git
 
-WORKDIR /var/games/minecraft/server/devServer
+WORKDIR /var/games/minecraft/server/unkledrew
 COPY ./src/scripts /src/scripts
 
 # Copy Server file.

@@ -34,31 +34,30 @@ Beyond an internet connection, these are the items you need to run.
     ```
 - Run Container (powershell)
 
+    ### To-Do: Update volume here. 
+
     ```
     docker run \
-        -v e:\minecraftdata\server-dev:/var/games/minecraft/server/devServer \
-        -p 25566:25565 -it minecraft
+    -v minecraft-dev_minecraft-data:/var/games/minecraft/server/unkledrew \
+    -p 25566:25565 -it minecraft
     ```
 ### Docker Compose
 - Build and run in one.
 
     ```
-    docker compose --env-file ./configs/.env.dev up 
+    docker compose up 
     ```
 
 # ToDo
 1. Environment info.
     - Need to design this.  Shouldn't have to build twice. 
-2. ~~Docker Compose file.~~ WORKING. 
+        - ServerName needs to be a variable that can change by environment. 
+2. ~~Docker Compose file.~~ WORKING. Additional changes will be dev work.
 3. Proper Volumes
     - Status: Copied E: over to wsl volume. 
     - Need to remove named binding over to "Volume" 
     - Need to create Dev Server initialization script.
 4. Setup Remote Version Control
-4. git Version Control for (repo initalized, and local.  Need to move to "Remote")
-    1. DockerFile and Docker-Compose
-    2. Run Scripts
-    3. Config Files
 5. Reconfigure Config Files.
 6. Backup / Restore Scripts for Server Files.
 7. Server Manager (MineOS?)
