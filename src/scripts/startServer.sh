@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/sh
 echo "Coping Server File to Mounted Volume"
 cp /src/spigot/spigot.jar /var/games/minecraft/server/unkledrew/spigot.jar
 
