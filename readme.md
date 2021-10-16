@@ -21,6 +21,10 @@ Beyond an internet connection, these are the items you need to run.
 - Docker Desktop
 
 ## Setup
+
+### EULA
+Agree to the Minecraft Server EULA in /src/eula
+
 ### Creating a Volume Drive:
 (Need to add some information here about creating a volume?)
  
@@ -37,8 +41,8 @@ Beyond an internet connection, these are the items you need to run.
     ### To-Do: Update volume here. 
 
     ```
-    docker run \
-    -v minecraft-dev_minecraft-data:/var/games/minecraft/server/unkledrew \
+    docker run `
+    -v minecraft-dev_minecraft-data:/var/games/minecraft/server/unkledrew `
     -p 25566:25565 -it minecraft
     ```
 ### Docker Compose

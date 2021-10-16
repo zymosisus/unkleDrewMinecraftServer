@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 echo "Coping Server File to Mounted Volume"
 cp /src/spigot/spigot.jar /var/games/minecraft/server/unkledrew/spigot.jar
 
@@ -16,6 +16,8 @@ echo "Get Config Files - source control for configuration management."
 #git checkout master
  
 echo ${PWD}
+echo "Copy EULA"
+cp /src/eula/eula.txt /var/games/minecraft/server/unkledrew/eula.txt
 
 echo "Start the server"
 java -Xms2G -Xmx2g -jar spigot.jar --nogui
