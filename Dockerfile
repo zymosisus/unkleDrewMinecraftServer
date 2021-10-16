@@ -62,7 +62,7 @@ FROM openjdk:16-jdk-buster
 RUN apt-get install git
 
 WORKDIR /var/games/minecraft/server/unkledrew
-COPY ./src/scripts /src/scripts
+COPY ./src /src
 
 # Copy Server file.
 RUN mkdir -p /src/spigot 
@@ -76,6 +76,5 @@ COPY --from=pluginBuilder /src/plugins/WorldEdit/worldedit-bukkit/build/libs/wor
 COPY --from=pluginBuilder /src/plugins/worldguard/worldguard-bukkit/build/libs/*-SNAPSHOT-dist.jar /src/plugins/WorldGuard.jar
 COPY --from=pluginBuilder /src/plugins/Essentials/jars/EssentialsX-*.jar /src/plugins/EssentialsX.jar
 
-#Run the server. <- This will be a script.
-##CMD ["java","-Xms2G", "-Xmx2g", "-jar", "spigot-1.17.jar", "--nogui"]
+#Run the server.
 CMD /src/scripts/startServer.sh

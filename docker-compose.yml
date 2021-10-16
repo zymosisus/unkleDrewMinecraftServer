@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-    app:
+    minecraftserver:
         build: .
-        command: /bin/sh -c "/src/scripts/startServer.sh"
+        command: /bin/bash -c "/src/scripts/startServer.sh"
         ports:
             - "25566:25565"
         working_dir: /var/games/minecraft/server/unkledrew
