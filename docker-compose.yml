@@ -5,9 +5,10 @@ services:
         command: /bin/bash -c "/src/scripts/startServer.sh"
         ports:
             - "25566:25565"
-        working_dir: /var/games/minecraft/server/unkledrew
+        working_dir: /var/games/minecraft/servers/unkledrew
         volumes:
-            - minecraft-data:/var/games/minecraft/server/unkledrew
+            - minecraft-data:/var/games/minecraft/servers/unkledrew
 
 volumes:
     minecraft-data:
+        external: true
