@@ -29,7 +29,7 @@ Beyond an internet connection, these are the items you need to run.
 
 - DockerDesktop 
     > The insturctions and information below assumes heavily that you're using this on a Windows machine with WSL2 installed and you're using PowerShell.
-- Development Enviornment. My I suggest Visual Studio Code...
+- Development Enviornment. May I suggest Visual Studio Code... 
 
 ## Setup
 
@@ -81,11 +81,12 @@ The Running host will require a persistent storage volume to store the server da
 1. Environment info.
     - Need to design this. 
         - ServerName needs to be a variable that can change by environment. 
-        - Test/Production volumes.
+        - Test/Production volumes. (InProcess with volume-manager)
 11. Add MobArena plugin to Build files.
+12. Modify to use swarm so backup services can run too?
 2. Figure out how to keep config files updated (Server, Plugin files).
-3. Version Manager for Plugins? 
-3. Backup / Restore Scripts for Server Files.
+3. Version/Package Manager for Plugins? 
+3. Backup / Restore Scripts for Server Files. (Move this to the volume-manager.)
     1. Pass Scerets to the container.
 4. Server Manager (MineOS?)
 5. startServer script

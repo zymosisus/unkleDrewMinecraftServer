@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+    volumemanager:
+        image: gentoo-dev
+        build: .
+        command: /bin/bash
+        stdin_open: true
+        tty: true
+        #ports:
+        #    - "25566:25565"
+        working_dir: /var/games/minecraft/servers/unkledrew
+        volumes:
+            - minecraft-data-test:/var/games/minecraft/servers/unkledrew
+        secrets:
+          - source: ssh_id_ed25519_key
+            target: /root/.ssh/id_ed25519
+            mode: 0400
+volumes:
+    minecraft-data-test:
+        external: true
+secrets:
+  ssh_id_ed25519_key:
+    external: true

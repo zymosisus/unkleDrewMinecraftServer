@@ -14,9 +14,7 @@ RUN emerge --sync\
 
 ### Temporary This worked...
 COPY ./home /root
-RUN mv /root/.ssh/unkledrew_ed25519 /root/.ssh/id_ed25519
-RUN chmod 644 /root/.ssh/known_hosts && \
-     chmod 600 /root/.ssh/id_ed25519
+RUN chmod 644 /root/.ssh/known_hosts
 
 WORKDIR /var/games/minecraft/servers
 CMD ["/bin/bash"]
