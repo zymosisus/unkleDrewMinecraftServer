@@ -3,12 +3,15 @@ services:
     minecraftserver:
         build: .
         command: /bin/bash -c "/src/scripts/startServer.sh"
+        stdin_open: true
+        tty: true 
         ports:
             - "25566:25565"
         working_dir: /var/games/minecraft/servers/unkledrew
         volumes:
-            - minecraft-data:/var/games/minecraft/servers/unkledrew
+            - minecraft-data-test:/var/games/minecraft/servers/unkledrew
 
 volumes:
-    minecraft-data:
+    minecraft-data-test:
+        name: minecraft-data-test
         external: true
