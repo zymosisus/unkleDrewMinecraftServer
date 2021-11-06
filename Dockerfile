@@ -4,14 +4,13 @@
 ## Spigot Server and Multiverse Plugins.
 #######################################
 FROM maven:3.8.1-openjdk-16 as spigotBuilder
-WORKDIR /src/spigot/build
 
+WORKDIR /src/spigot/build
 RUN curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 RUN java -jar BuildTools.jar \
     && cp ./spigot*.jar /src/spigot \
     && cd .. \
     && rm -rf build
-#RUN ["java", "-jar", "BuildTools.jar"]
 
 WORKDIR /src/plugins
 RUN mkdir out
@@ -37,22 +36,43 @@ RUN cd Multiverse-Inventories \
     && cd .. \
     && rm -rf Multivers-Inventories
 
+
 #######################################
 # Gradle Plugin Builder
 #######################################
 FROM gradle:jdk16 as pluginBuilder
+
 WORKDIR /src/plugins
+RUN mkdir out
+
 # Get and build LuckPerms
-RUN git clone https://github.com/lucko/LuckPerms.git && cd LuckPerms/ && ./gradlew build && cd ..
+RUN git clone https://github.com/lucko/LuckPerms.git \
+    && cd LuckPerms/ \
+    && ./gradlew build \
+    && cd .. \
+    && cp LuckPerms/bukkit/loader/build/libs/LuckPerms-Bukkit-*.jar ./out/LuckPerms.jar \
+    && rm -rf LuckPerms
 # Get and build WorldEdit
-RUN git clone https://github.com/EngineHub/WorldEdit && cd WorldEdit/ && ./gradlew build && cd ..
+RUN git clone https://github.com/EngineHub/WorldEdit \
+    && cd WorldEdit/ \
+    && ./gradlew build \
+    && cp /src/plugins/WorldEdit/worldedit-bukkit/build/libs/worldedit-bukkit-*-SNAPSHOT-dist.jar /src/plugins/out/WorldEdit.jar \
+    && cd .. \
+    && rm -rf WorldEdit
 # Get and build WorldGuard
-RUN git clone https://github.com/EngineHub/worldguard && cd worldguard/ && ./gradlew build && cd ..
+RUN git clone https://github.com/EngineHub/worldguard \
+    && cd worldguard/ \
+    && ./gradlew build \
+    && cd .. \
+    && cp /src/plugins/worldguard/worldguard-bukkit/build/libs/*-SNAPSHOT-dist.jar /src/plugins/out/WorldGuard.jar \
+    && rm -rf worldguard
 # Get and build EssentialsX
 RUN git clone https://github.com/EssentialsX/Essentials \
     && cd Essentials/ \
     && ./gradlew build \
-    && cd ..
+    && cd .. \
+    && cp /src/plugins/Essentials/jars/EssentialsX-*.jar /src/plugins/out/EssentialsX.jar \
+    && rm -rf Essentials
 
 #######################################
 # Runtime Container
@@ -71,10 +91,7 @@ COPY --from=spigotBuilder /src/spigot/spigot*.jar /src/spigot/spigot.jar
 #Copy Plugins
 RUN mkdir /src/plugins
 COPY --from=spigotBuilder /src/plugins/out/* /src/plugins/
-COPY --from=pluginBuilder /src/plugins/LuckPerms/bukkit/loader/build/libs/LuckPerms-Bukkit-*.jar /src/plugins/LuckPerms.jar
-COPY --from=pluginBuilder /src/plugins/WorldEdit/worldedit-bukkit/build/libs/worldedit-bukkit-*-SNAPSHOT-dist.jar  /src/plugins/WorldEdit.jar
-COPY --from=pluginBuilder /src/plugins/worldguard/worldguard-bukkit/build/libs/*-SNAPSHOT-dist.jar /src/plugins/WorldGuard.jar
-COPY --from=pluginBuilder /src/plugins/Essentials/jars/EssentialsX-*.jar /src/plugins/EssentialsX.jar
+COPY --from=pluginBuilder /src/plugins/out/* /src/plugins/
 
 #Run the server.
 CMD /src/scripts/startServer.sh

@@ -76,8 +76,20 @@ The Running host will require a persistent storage volume to store the server da
     docker compose up 
     ```
 
-# ToDo
-0. Clean up Docker File and Plugin build commands.
+### Safe Shutdown
+- Command line (PowerShell)
+
+    ```
+    docker attach minecraft-dev_minecraftserver_1
+    ```
+
+- Running from *nix with socat installed:
+
+    ```
+    echo "stop" | socat EXEC:"docker attach minecraft-dev_minecraftserver_1",pty STDIN
+    ```
+
+## ToDo
 1. Environment info.
     - Need to design this. 
         - ServerName needs to be a variable that can change by environment. 

@@ -128,7 +128,7 @@ ___
     2. Extract the image
         ```
         cd /var/games/minecraft/server/
-        tar -xzvf {servername}.20211031.tar.gz -C /var/games/minecraft/servers/{servername}
+        tar -xzvf {servername}.20211031.tar.gz -C .
         #clean up your artifacts, even if the container will kill it.
         rm {servername}.{date}.tar.gz
         ```
